@@ -37,7 +37,7 @@ class RunMathSeries:
         n = int(input("Enter a non-negative integer: "))
         math_series = MathSeries()
         
-        print("Fibonacci Series:", MathSeries.fibonacci_sequence(n))
+        print("Fibonacci Series:", math_series.fibonacci_sequence(n))
 
 if __name__ == "__main__":
     RunMathSeries.run()
