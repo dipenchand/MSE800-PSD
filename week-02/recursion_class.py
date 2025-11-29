@@ -2,12 +2,12 @@ class RecursiveMath:
     def factorial(n):
         if n == 0:
             return 1
-        return n * RecursiveMath.factorial(n - 1)
+        return n * factorial(n - 1)
 
     def fibonacci(n):
         if n <= 1:
             return n
-        return RecursiveMath.fibonacci(n - 1) + RecursiveMath.fibonacci(n - 2)
+        return fibonacci(n - 1) + fibonacci(n - 2)
 
 
 class Calculator:
@@ -26,8 +26,8 @@ class Calculator:
         return choice
     
     def run():
-        Calculator.display_menu()
-        choice = Calculator.get_user_input()
+        display_menu()
+        choice = get_user_input()
         
         if choice == "1":
             n = int(input("Enter a non-negative integer: "))
