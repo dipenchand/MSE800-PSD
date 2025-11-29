@@ -12,6 +12,8 @@ class RecursiveMath:
 
 class Calculator:
     result = None
+
+    recursive_math = RecursiveMath()
     
     def display_menu():
         print("Choose an operation:")
@@ -29,10 +31,10 @@ class Calculator:
         
         if choice == "1":
             n = int(input("Enter a non-negative integer: "))
-            ans = RecursiveMath.factorial(n)
+            ans = recursive_math.factorial(n)
         elif choice == "2":
             n = int(input("Enter a non-negative integer: "))
-            ans = RecursiveMath.fibonacci(n)
+            ans = recursive_math.fibonacci(n)
         else:
             ans = "Invalid choice"
         
