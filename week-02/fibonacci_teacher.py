@@ -19,7 +19,8 @@ class MathSeries:
             return 1
         return (MathSeries.fibonacci_recursive(n - 1) + MathSeries.fibonacci_recursive(n - 2))
     
-    def fibonacci_sequence(self, n):
+    @staticmethod
+    def fibonacci_sequence(n):
         if n <= 0:
             return []
         elif n == 1:    
@@ -27,7 +28,7 @@ class MathSeries:
         elif n == 2:
             return [0, 1]
         else:
-            seq = self.fibonacci_sequence(n - 1)
+            seq = MathSeries.fibonacci_sequence(n - 1)
             seq.append(seq[-1] + seq[-2])
             return seq
         
@@ -36,7 +37,7 @@ class RunMathSeries:
         n = int(input("Enter a non-negative integer: "))
         math_series = MathSeries()
         
-        print("Fibonacci Series:", math_series.fibonacci_sequence(n))
+        print("Fibonacci Series:", MathSeries.fibonacci_sequence(n))
 
 if __name__ == "__main__":
     RunMathSeries.run()
