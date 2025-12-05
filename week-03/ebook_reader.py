@@ -1,5 +1,3 @@
-import os
-import sys
 from pathlib import Path
 
 class EBookReader:
@@ -30,9 +28,8 @@ class EBookReader:
         print(f"  Size: {stat.st_size} bytes")
         print(f"  Modified: {stat.st_mtime}")
         print(f"  Is file: {path.is_file()}")
-        print(f"  Is readable: {os.access(path, os.R_OK)}")
         
-        data = open(file_path)
+        data = open(file_path, 'r')
         lines = data.readlines()
         
         print("*" * 40)
@@ -43,7 +40,7 @@ class EBookReader:
     def count_asterisk_in_code(self, file_path):
         path = Path(file_path)
             
-        file = open(path)
+        file = open(path, 'r')
         content = file.read()
         file.close()
         
