@@ -6,20 +6,16 @@ class EBookReader:
 
     def display_file_info(self, file_path):
         path = Path(file_path)
-        
-        data = open(file_path, 'r')
-        lines = data.readlines()
-        
-        for line in lines:
-            print(line[0:-1])
-        data.close()
+
+        with open(path, 'r') as f:
+            content = f.read()
+            print(content)
     
     # Append content to the end of a file.
     def append_eof(self, file_path):
         content_to_append = "**** End of File ****"
         with open(file_path, 'a', encoding='utf-8') as file:
-            file.write("\n")
-            file.write(content_to_append)
+            file.write("\n" + content_to_append)
 
 def main():
     reader = EBookReader()
