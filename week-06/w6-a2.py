@@ -101,9 +101,9 @@ def main():
     # Display top 3 students
     print("\nTop 3 Students by Score:")
     top_students = student.get_top_students(3)
-    for i, (student_id, name, score) in enumerate(top_students, start=1):
-        print(f"RANK: {i} ID: {student_id}, Name: {name}, MSE800 Score: {score}")
-
+    for student_id, name, score in top_students:
+        print(f"ID: {student_id}, Name: {name}, MSE800 Score: {score}")
+    
     # Close database connection
     student.close_database()
 
