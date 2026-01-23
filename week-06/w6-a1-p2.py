@@ -27,25 +27,30 @@ class Student:
 
     # PART-2 
     def get_passed_students(self):
-        # Combine dictionaries and return only students who passed (score >= 50)
-        passed_students = {}
-        for student_id in self.students:
-            score = self.mse800_scores.get(student_id, 0)
-            if score >= 50:
-                passed_students[student_id] = {
-                    "name": self.students[student_id],
-                    "score": score
-                }
+        # Merge dictionaries using comprehension conditions
+        passed_students = {
+            **{student_id: {"name": self.students[student_id], "score": self.mse800_scores[student_id]}
+               for student_id in self.students
+               if self.mse800_scores.get(student_id, 0) >= 50},
+            **{student_id: {"name": self.students[student_id], "score": self.mse800_scores[student_id]}
+               for student_id in self.mse800_scores
+               if self.mse800_scores.get(student_id, 0) >= 50}
+        }
         return passed_students
 
-# Create an instance of Student
-student = Student()
+def main():
+    # Create an instance of Student
+    student = Student()
 
-# Display all students
-student.display_students()
+    # Display all students
+    student.display_students()
 
-# Display only passed students
-print("\nPassed Students (Score >= 50):")
-passed = student.get_passed_students()
-for student_id, details in passed.items():
-    print(f"ID: {student_id}, Name: {details['name']}, MSE800 Score: {details['score']}")
+    # Display only passed students
+    print("\nPassed Students (Score >= 50):")
+    passed = student.get_passed_students()
+    for student_id, details in passed.items():
+        print(f"ID: {student_id}, Name: {details['name']}, MSE800 Score: {details['score']}")
+
+
+if __name__ == "__main__":
+    main()
