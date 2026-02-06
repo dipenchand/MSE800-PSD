@@ -7,4 +7,5 @@
  
 <img width="800" height="100%" alt="Screenshot 2026-02-07 at 12 18 10 PM" src="https://github.com/user-attachments/assets/9674051d-43d4-4e15-9568-69207c3a6aa9" />
 <br>
-<img width="413" height="100%" alt="Screenshot 2026-02-07 at 12 38 45 PM" src="https://github.com/user-attachments/assets/563a714d-6f07-4217-9895-1e8769bde6b9" />
+
+<img width="418" height="100%" alt="Screenshot 2026-02-07 at 12 41 26 PM" src="https://github.com/user-attachments/assets/4aa14fb9-e1d2-438f-9736-b7359d9a8d4e" />
