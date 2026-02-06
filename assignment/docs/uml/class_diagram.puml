@@ -1,0 +1,81 @@
+@startuml
+skinparam packageStyle rectangle
+
+package "Presentation" {
+  class CarRentalApp {
+    - db: DatabaseManager
+    - auth_service: AuthService
+    - car_service: CarService
+    - rental_service: RentalService
+    - company_service: CompanyService
+    - current_user: User
+    - current_company: Company
+    + start()
+  }
+
+  class TUI {
+    + draw_top_bar(...)
+    + draw_table(...)
+    + get_input(...)
+    + get_password(...)
+  }
+
+  class Validator {
+    + validate_email(email)
+    + validate_date(date_str)
+  }
+}
+
+package "Services" {
+  class AuthService
+  class CarService
+  class RentalService
+  class CompanyService
+}
+
+package "Models" {
+  abstract class User {
+    + id
+    + username
+    + name
+    + email
+    + company_id
+    + get_role()
+  }
+  class Admin
+  class Customer
+  class Car
+  class Booking
+  class Company
+}
+
+package "Data Access" {
+  class DatabaseManager {
+    + execute_query(query, params)
+    + fetch_one(query, params)
+    + fetch_all(query, params)
+  }
+}
+
+CarRentalApp --> TUI
+CarRentalApp --> Validator
+CarRentalApp --> AuthService
+CarRentalApp --> CarService
+CarRentalApp --> RentalService
+CarRentalApp --> CompanyService
+
+AuthService --> DatabaseManager
+CarService --> DatabaseManager
+RentalService --> DatabaseManager
+CompanyService --> DatabaseManager
+
+Admin --|> User
+Customer --|> User
+
+CarService ..> Car
+RentalService ..> Booking
+CompanyService ..> Company
+AuthService ..> Admin
+AuthService ..> Customer
+
+@enduml

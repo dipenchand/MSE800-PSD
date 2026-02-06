@@ -1,0 +1,33 @@
+@startuml
+actor Customer
+participant CarRentalApp
+participant TUI
+participant Validator
+participant CarService
+participant RentalService
+participant DatabaseManager
+
+Customer -> CarRentalApp: Select "Book"
+CarRentalApp -> TUI: get_input(car id)
+CarRentalApp -> CarService: get_available_cars(company_id)
+CarService -> DatabaseManager: fetch_all(available cars)
+DatabaseManager --> CarService: rows
+CarService --> CarRentalApp: Car[]
+
+CarRentalApp -> TUI: get_input(start_date)
+CarRentalApp -> TUI: get_input(end_date)
+CarRentalApp -> Validator: validate_date(start/end)
+Validator --> CarRentalApp: ok
+
+CarRentalApp -> RentalService: calculate_total_fee(daily_rate, start, end)
+RentalService --> CarRentalApp: total_fee
+
+CarRentalApp -> TUI: get_input(confirm)
+Customer -> CarRentalApp: confirm 'y'
+CarRentalApp -> RentalService: create_booking(user_id, car_id, start, end, fee, company_id)
+RentalService -> DatabaseManager: execute_query(INSERT booking PENDING)
+DatabaseManager --> RentalService: ok
+RentalService --> CarRentalApp: booking_id
+
+CarRentalApp --> Customer: Status "Booking Requested"
+@enduml

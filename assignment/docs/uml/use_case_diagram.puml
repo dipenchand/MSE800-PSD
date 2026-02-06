@@ -1,0 +1,43 @@
+@startuml
+left to right direction
+
+actor Customer
+actor Admin
+
+rectangle "Car Rental Management System (CRMS)" {
+  usecase "Register" as UC_Register
+  usecase "Login" as UC_Login
+
+  usecase "View Available Cars" as UC_ViewAvail
+  usecase "Create Booking Request" as UC_Book
+  usecase "View My Bookings" as UC_MyBookings
+
+  usecase "Add Car" as UC_AddCar
+  usecase "Update Car" as UC_UpdateCar
+  usecase "Delete Car" as UC_DeleteCar
+  usecase "List Cars" as UC_ListCars
+
+  usecase "View Bookings" as UC_ViewBookings
+  usecase "Approve Booking" as UC_Approve
+  usecase "Reject Booking" as UC_Reject
+}
+
+Customer --> UC_Register
+Customer --> UC_Login
+Customer --> UC_ViewAvail
+Customer --> UC_Book
+Customer --> UC_MyBookings
+
+Admin --> UC_Login
+Admin --> UC_AddCar
+Admin --> UC_UpdateCar
+Admin --> UC_DeleteCar
+Admin --> UC_ListCars
+Admin --> UC_ViewBookings
+Admin --> UC_Approve
+Admin --> UC_Reject
+
+UC_Approve ..> UC_ViewBookings : includes
+UC_Reject ..> UC_ViewBookings : includes
+
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+actor Admin
+participant CarRentalApp
+participant TUI
+participant RentalService
+participant DatabaseManager
+
+Admin -> CarRentalApp: Open "Bookings"
+CarRentalApp -> RentalService: get_all_bookings(company_id)
+RentalService -> DatabaseManager: fetch_all(bookings)
+DatabaseManager --> RentalService: rows
+RentalService --> CarRentalApp: Booking[]
+
+CarRentalApp -> TUI: get_input(booking id)
+Admin -> CarRentalApp: select pending booking
+CarRentalApp -> TUI: get_input(A/R)
+Admin -> CarRentalApp: choose A
+
+CarRentalApp -> RentalService: approve_booking(booking_id)
+RentalService -> DatabaseManager: fetch_one(booking)
+DatabaseManager --> RentalService: booking
+RentalService -> DatabaseManager: execute_query(UPDATE booking APPROVED)
+RentalService -> DatabaseManager: execute_query(UPDATE car available=0)
+DatabaseManager --> RentalService: ok
+RentalService --> CarRentalApp: true
+
+CarRentalApp --> Admin: Status "Approved"
+@enduml
