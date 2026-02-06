@@ -7,7 +7,7 @@ In `botfactory.py`, `Maker.produce(unit_type, id)` centralizes object creation a
   - Calling code depends on the `Unit`, not specific subclasses.
   - New unit types can be added in one place.
 - **Disadvantages**
-  - Can grow into a long if/elif chain: adding many types makes the factory harder to maintain.
+  - Adding many types makes the factory harder to maintain.
 
 ### 2) Singleton Pattern
 In `core.py`, `KeeperMeta.__call__` ensures only one `Keeper` instance exists, so all code that calls `Keeper()` shares the same central `units` collection.
