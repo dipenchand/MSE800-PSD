@@ -1,4 +1,7 @@
+"""Extract CV text (PDF/DOCX) and analyze it using the Gemini API."""
+
 import os
+import sys
 import json
 import urllib.request
 import urllib.error
@@ -126,15 +129,16 @@ def analyze_cv(cv_text):
 
     try:
         return resp_json["candidates"][0]["content"]["parts"][0]["text"]
-    except (KeyError, IndexError, TypeError):
-        raise RuntimeError(f"Unexpected Gemini response format: {resp_json}")
+    except (KeyError, IndexError, TypeError) as exc:
+        raise RuntimeError(f"Unexpected Gemini response format: {resp_json}") from exc
 
-if __name__ == "__main__":
+def main():
+    """CLI entry point for extracting and analyzing a CV."""
     file_path = input("Enter CV file path (PDF/DOCX): ").strip()
 
     if not os.path.exists(file_path):
         print("File not found!")
-        exit()
+        sys.exit(1)
 
     # Extract text based on file type
     if file_path.endswith(".pdf"):
@@ -143,10 +147,14 @@ if __name__ == "__main__":
         cv_text = extract_text_from_docx(file_path)
     else:
         print("Unsupported file format!")
-        exit()
+        sys.exit(1)
 
-    print("\nAnalyzing CV with Gemini...\n\n ", cv_text,"\n\n")
+    print("\nAnalyzing CV with Gemini...\n\n ", cv_text, "\n\n")
     analysis_result = analyze_cv(cv_text)
-    
+
     print("\n--- CV Analysis Results ---\n")
     print(analysis_result)
+
+
+if __name__ == "__main__":
+    main()
