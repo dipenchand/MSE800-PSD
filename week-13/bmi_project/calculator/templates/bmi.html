@@ -50,10 +50,26 @@
         </div>
 
         {% if bmi %}
-        <h3>Your BMI: {{ bmi|floatformat:2 }}</h3>
-        {% if category %}
-        <p>Category: <strong>{{ category }}</strong></p>
-        {% endif %} {% endif %}
+        <div class="mt-3 p-3 rounded border bg-light">
+          <div class="d-flex align-items-start justify-content-between flex-wrap gap-2">
+            <div>
+              <h3 class="mb-1">Your BMI: {{ bmi }}</h3>
+              {% if category %}
+              <div class="text-muted">Category: <span class="fw-semibold">{{ category }}</span></div>
+              {% endif %}
+            </div>
+
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              {% if age %}
+              <span class="badge text-bg-secondary">Age: {{ age }}</span>
+              {% endif %}
+              {% if gender %}
+              <span class="badge text-bg-secondary text-capitalize">Gender: {{ gender }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
         
         {% if plan %}
         <div class="border-top pt-3">

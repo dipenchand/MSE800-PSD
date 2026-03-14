@@ -20,7 +20,7 @@ def bmi_calculator(request):
 
         # formula: BMI = weight (kg) / [height (m)] x [height (m)]
         height_in_meters = height / 100
-        bmi = round(weight / (height_in_meters**2), 2)
+        bmi = weight / (height_in_meters**2)
 
         # BMI category
         if bmi < 18.5:
